@@ -12,7 +12,7 @@ export default function Search() {
   const [avatar, setAvatar] = useState("");
   const [htmlUrl, setHtmlUrl] = useState("");
 
-  const setData = ({
+  const users = ({
     name,
     login,
     followers,
@@ -38,7 +38,7 @@ export default function Search() {
     setLoading(true);
     fetch(`https://api.github.com/users/${username}`,{ headers:{Authorization:  token, Accept: 'application/vnd.github.v3+json'}, })
     .then(response => response.json())
-		.then(data => setData(data))
+		.then(data => users(data))
 		.catch(error => console.log(error));};
 
  
@@ -75,7 +75,7 @@ export default function Search() {
         </div>
       </div>
 
-        
+      
       <div class="rounded-3xl overflow-hidden shadow-xl max-w-xs m-10  bg-gray-400">
         <img
           src="https://pngimg.com/uploads/github/github_PNG15.png"
