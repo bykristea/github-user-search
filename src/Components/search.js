@@ -11,6 +11,8 @@ export default function Search() {
   const [repos, setRepos] = useState("");
   const [avatar, setAvatar] = useState("");
   const [htmlUrl, setHtmlUrl] = useState("");
+  const [reposUrl, setReposUrl] = useState("");
+
 
   const users = ({
     name,
@@ -20,6 +22,7 @@ export default function Search() {
     public_repos,
     avatar_url,
     html_url,
+    repos_url,
   }) => {
     setName(name);
     setUsername(login);
@@ -28,15 +31,15 @@ export default function Search() {
     setRepos(public_repos);
     setAvatar(avatar_url);
     setHtmlUrl(html_url);
+    setReposUrl(repos_url);
   };
 
 
 
-  const token = "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";
 
   function getUser() {
     setLoading(true);
-    fetch(`https://api.github.com/users/${username}`,{ headers:{Authorization:  token, Accept: 'application/vnd.github.v3+json'}, })
+    fetch(`https://api.github.com/users/${username}`,{ headers:{ Accept: 'application/vnd.github.v3+json'}, })
     .then(response => response.json())
 		.then(data => users(data))
 		.catch(error => console.log(error));};
@@ -102,7 +105,7 @@ export default function Search() {
           </div>
           <div class="text-center mr-3 border-r pr-3">
             <h2>{repos}</h2>
-            <span>Repos</span>
+            <a href={reposUrl}>Repos</a>
           </div>
           <div class="text-center">
             <h2>{following}</h2>
